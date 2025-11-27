@@ -14,7 +14,18 @@ struct SettingsView: View {
     @State private var sliderValue: Double = 100
     var body: some View {
         NavigationStack {
-            Form {
+            VStack(spacing: 0) {
+                VStack(spacing: 16) {
+                    Image("FloorFace")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120, height: 120)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+                .background(Color(.systemGroupedBackground))
+                
+                Form {
                 Section("Weekly goal") {
                     Slider(value: $sliderValue, in: 20...2000, step: 10) {
                         Text("Weekly Goal")
@@ -39,6 +50,7 @@ struct SettingsView: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .padding(.vertical, 4)
+                }
                 }
             }
             .navigationTitle("Settings")

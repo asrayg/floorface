@@ -8,7 +8,7 @@
 import Foundation
 
 struct PushupDay: Identifiable {
-    let id = UUID()
+    var id: String { dateString }
     let dateString: String
     let count: Int
 }

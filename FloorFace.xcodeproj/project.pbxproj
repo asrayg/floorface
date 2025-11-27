@@ -13,6 +13,7 @@
 		871E05CB2ED8233A00318BA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 871E05CA2ED8233A00318BA8 /* Preview Assets.xcassets */; };
 		871E05CD2ED8233A00318BA8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E05CC2ED8233A00318BA8 /* Persistence.swift */; };
 		871E05D02ED8233A00318BA8 /* FloorFace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 871E05CE2ED8233A00318BA8 /* FloorFace.xcdatamodeld */; };
+		A1E002032EDC549000000001 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E002022EDC549000000001 /* LaunchScreen.storyboard */; };
 		A1E001012ED9000000000001 /* PushupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001002ED9000000000001 /* PushupModel.swift */; };
 		A1E001052ED9000000000001 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001042ED9000000000001 /* DataStore.swift */; };
 		A1E0010B2ED9000000000001 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0010A2ED9000000000001 /* NotificationService.swift */; };
@@ -26,6 +27,8 @@
 		A1E0011D2ED9000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0011C2ED9000000000001 /* SettingsView.swift */; };
 		A1E002002EDC4F0000000001 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001FF2EDC4F0000000001 /* ShareSheet.swift */; };
 		A1E002022EDC53F000000001 /* NotificationPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002012EDC53F000000001 /* NotificationPromptView.swift */; };
+		A1E002062EDC58C000000001 /* CameraPreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002052EDC58C000000001 /* CameraPreviewManager.swift */; };
+		A1E002082EDC5B0000000001 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002072EDC5B0000000001 /* CameraPreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,7 @@
 		871E05CF2ED8233A00318BA8 /* FloorFace.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FloorFace.xcdatamodel; sourceTree = "<group>"; };
 		A1E001002ED9000000000001 /* PushupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushupModel.swift; sourceTree = "<group>"; };
 		A1E001042ED9000000000001 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		A1E002022EDC549000000001 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1E0010A2ED9000000000001 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		A1E0010E2ED9000000000001 /* PushupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushupViewModel.swift; sourceTree = "<group>"; };
 		A1E001102ED9000000000001 /* RecapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapViewModel.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 		A1E0011C2ED9000000000001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A1E001FF2EDC4F0000000001 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		A1E002012EDC53F000000001 /* NotificationPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPromptView.swift; sourceTree = "<group>"; };
+		A1E002052EDC58C000000001 /* CameraPreviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewManager.swift; sourceTree = "<group>"; };
+		A1E002072EDC5B0000000001 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,7 @@
 			children = (
 				871E05C32ED8233800318BA8 /* FloorFaceApp.swift */,
 				871E05C52ED8233800318BA8 /* ContentView.swift */,
+				A1E002022EDC549000000001 /* LaunchScreen.storyboard */,
 				A1E001242ED9000000000001 /* Models */,
 				A1E001252ED9000000000001 /* ViewModels */,
 				A1E001262ED9000000000001 /* Views */,
@@ -128,6 +135,7 @@
 			children = (
 				A1E001142ED9000000000001 /* HomeView.swift */,
 				A1E001162ED9000000000001 /* PushupCaptureView.swift */,
+				A1E002072EDC5B0000000001 /* CameraPreviewView.swift */,
 				A1E001182ED9000000000001 /* StatsView.swift */,
 				A1E0011C2ED9000000000001 /* SettingsView.swift */,
 				A1E002012EDC53F000000001 /* NotificationPromptView.swift */,
@@ -140,6 +148,7 @@
 			children = (
 				A1E001042ED9000000000001 /* DataStore.swift */,
 				A1E0010A2ED9000000000001 /* NotificationService.swift */,
+				A1E002052EDC58C000000001 /* CameraPreviewManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -212,6 +221,7 @@
 			files = (
 				871E05CB2ED8233A00318BA8 /* Preview Assets.xcassets in Resources */,
 				871E05C82ED8233A00318BA8 /* Assets.xcassets in Resources */,
+				A1E002032EDC549000000001 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +249,8 @@
 				A1E0011D2ED9000000000001 /* SettingsView.swift in Sources */,
 				A1E002002EDC4F0000000001 /* ShareSheet.swift in Sources */,
 				A1E002022EDC53F000000001 /* NotificationPromptView.swift in Sources */,
+				A1E002062EDC58C000000001 /* CameraPreviewManager.swift in Sources */,
+				A1E002082EDC5B0000000001 /* CameraPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
