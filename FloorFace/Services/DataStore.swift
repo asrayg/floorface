@@ -14,6 +14,8 @@ final class DataStore {
         static let weeklyGoal = "weeklyGoal"
         static let lastGoalPrompt = "lastGoalPrompt"
         static let streakCount = "streakCount"
+        static let hasPromptedForNotifications = "hasPromptedForNotifications"
+        static let notificationsEnabled = "notificationsEnabled"
     }
 
     private let defaults: UserDefaults
@@ -46,6 +48,16 @@ final class DataStore {
         let key = isoFormatter.string(from: date)
         var counts = loadDailyCounts()
         counts[key, default: 0] += amount
+        saveDailyCounts(counts)
+        return counts[key, default: 0]
+    }
+
+    @discardableResult
+    func decrementDailyCount(for date: Date, by amount: Int) -> Int {
+        let key = isoFormatter.string(from: date)
+        var counts = loadDailyCounts()
+        let current = counts[key, default: 0]
+        counts[key] = max(current - amount, 0)
         saveDailyCounts(counts)
         return counts[key, default: 0]
     }
@@ -147,6 +159,22 @@ final class DataStore {
 
     func updateStreak(_ value: Int) {
         defaults.set(value, forKey: Key.streakCount)
+    }
+
+    func hasPromptedForNotifications() -> Bool {
+        defaults.bool(forKey: Key.hasPromptedForNotifications)
+    }
+
+    func setPromptedForNotifications(_ value: Bool) {
+        defaults.set(value, forKey: Key.hasPromptedForNotifications)
+    }
+
+    func notificationsEnabled() -> Bool {
+        defaults.bool(forKey: Key.notificationsEnabled)
+    }
+
+    func setNotificationsEnabled(_ value: Bool) {
+        defaults.set(value, forKey: Key.notificationsEnabled)
     }
 
     // MARK: - Chart helpers

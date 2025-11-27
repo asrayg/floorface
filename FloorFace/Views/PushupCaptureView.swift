@@ -24,9 +24,13 @@ struct PushupCaptureView: View {
                     Text("Today's Pushups")
                         .font(.headline)
                         .foregroundStyle(.secondary)
-                    Text("\(viewModel.todayCount)")
-                        .font(.system(size: 72, weight: .heavy, design: .rounded))
-                        .foregroundStyle(.white)
+                    HStack(spacing: 24) {
+                        
+                        Text("\(viewModel.todayCount)")
+                            .font(.system(size: 72, weight: .heavy, design: .rounded))
+                            .foregroundStyle(.white)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
                 }
 
                 VStack(spacing: 8) {

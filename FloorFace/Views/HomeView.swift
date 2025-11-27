@@ -11,6 +11,7 @@ struct HomeView: View {
     @EnvironmentObject var pushupViewModel: PushupViewModel
     @EnvironmentObject var recapViewModel: RecapViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var appStateViewModel: AppStateViewModel
 
     @State private var goalInput: Double = 100
 
@@ -47,10 +48,22 @@ struct HomeView: View {
             )
             .presentationDetents([.medium])
         }
-        .onChange(of: settingsViewModel.showGoalPrompt) { show in
+        .onChange(of: settingsViewModel.showGoalPrompt) { _, show in
             if show {
                 goalInput = Double(settingsViewModel.currentGoal)
             }
+        }
+        .sheet(isPresented: $appStateViewModel.showNotificationPrompt) {
+            NotificationPromptView(
+                onEnable: {
+                    NotificationService.shared.requestAuthorization { _ in
+                        appStateViewModel.dismissNotificationPrompt()
+                    }
+                },
+                onSkip: {
+                    appStateViewModel.dismissNotificationPrompt()
+                }
+            )
         }
     }
 }

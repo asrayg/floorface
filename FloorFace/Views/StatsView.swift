@@ -7,11 +7,15 @@
 
 import Charts
 import SwiftUI
+import UIKit
 
 struct StatsView: View {
     @EnvironmentObject var pushupViewModel: PushupViewModel
     @EnvironmentObject var recapViewModel: RecapViewModel
     @Environment(\.scenePhase) private var scenePhase
+
+    @State private var shareImage: UIImage?
+    @State private var isSharing = false
 
     var body: some View {
         NavigationStack {
@@ -29,15 +33,20 @@ struct StatsView: View {
                 pushupViewModel.refreshStoredProgress()
                 recapViewModel.refresh()
             }
-            .onChange(of: scenePhase) { phase in
+            .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
                     pushupViewModel.refreshStoredProgress()
                     recapViewModel.refresh()
                 }
             }
-            .onChange(of: pushupViewModel.todayCount) { _ in
+            .onChange(of: pushupViewModel.todayCount) { _, _ in
                 recapViewModel.refresh()
                 pushupViewModel.refreshStoredProgress()
+            }
+            .sheet(isPresented: $isSharing) {
+                if let shareImage {
+                    ShareSheet(activityItems: [shareImage])
+                }
             }
         }
     }
@@ -61,69 +70,134 @@ struct StatsView: View {
     }
 
     private var weeklyChart: some View {
-        chartSection(title: "Weekly Trend", subtitle: recapViewModel.weekLabel) {
-            Chart(recapViewModel.weeklyPoints) { point in
-                LineMark(
-                    x: .value("Day", point.label),
-                    y: .value("Pushups", point.count)
-                )
-                PointMark(
-                    x: .value("Day", point.label),
-                    y: .value("Pushups", point.count)
-                )
-            }
-            .frame(height: 220)
-            .chartYScale(domain: 0...Double(max(10, weeklyMax)))
+        chartSection(title: "Weekly Trend", subtitle: recapViewModel.weekLabel, shareAction: {
+            shareChart(.weekly)
+        }) {
+            weeklyChartView
         }
     }
 
     private var monthlyChart: some View {
-        chartSection(title: "Monthly Trend", subtitle: recapViewModel.monthLabel) {
-            Chart(recapViewModel.monthlyPoints) { point in
-                LineMark(
-                    x: .value("Day", point.day),
-                    y: .value("Pushups", point.count)
-                )
-                PointMark(
-                    x: .value("Day", point.day),
-                    y: .value("Pushups", point.count)
-                )
-            }
-            .frame(height: 220)
-            .chartYScale(domain: 0...Double(max(10, monthlyMax)))
+        chartSection(title: "Monthly Trend", subtitle: recapViewModel.monthLabel, shareAction: {
+            shareChart(.monthly)
+        }) {
+            monthlyChartView
         }
     }
 
     private var yearlyChart: some View {
-        chartSection(title: "Yearly Trend", subtitle: recapViewModel.yearLabel) {
-            Chart(recapViewModel.yearlyPoints) { point in
-                LineMark(
-                    x: .value("Month", point.label),
-                    y: .value("Pushups", point.count)
-                )
-                PointMark(
-                    x: .value("Month", point.label),
-                    y: .value("Pushups", point.count)
-                )
-            }
-            .frame(height: 220)
-            .chartYScale(domain: 0...Double(max(10, yearlyMax)))
+        chartSection(title: "Yearly Trend", subtitle: recapViewModel.yearLabel, shareAction: {
+            shareChart(.yearly)
+        }) {
+            yearlyChartView
         }
     }
 
-    private func chartSection<Content: View>(title: String, subtitle: String, @ViewBuilder content: () -> Content) -> some View {
+    private func chartSection<Content: View>(title: String, subtitle: String, shareAction: (() -> Void)? = nil, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(title)
-                .font(.headline)
-            Text(subtitle)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.headline)
+                    Text(subtitle)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                if let shareAction {
+                    Button(action: shareAction) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
             content()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(.ultraThinMaterial)
         .cornerRadius(16)
+    }
+
+    private var weeklyChartView: some View {
+        Chart(recapViewModel.weeklyPoints) { point in
+            LineMark(
+                x: .value("Day", point.label),
+                y: .value("Pushups", point.count)
+            )
+            PointMark(
+                x: .value("Day", point.label),
+                y: .value("Pushups", point.count)
+            )
+        }
+        .frame(height: 220)
+        .chartYScale(domain: 0...Double(max(10, weeklyMax)))
+    }
+
+    private var monthlyChartView: some View {
+        Chart(recapViewModel.monthlyPoints) { point in
+            LineMark(
+                x: .value("Day", point.day),
+                y: .value("Pushups", point.count)
+            )
+            PointMark(
+                x: .value("Day", point.day),
+                y: .value("Pushups", point.count)
+            )
+        }
+        .frame(height: 220)
+        .chartYScale(domain: 0...Double(max(10, monthlyMax)))
+    }
+
+    private var yearlyChartView: some View {
+        Chart(recapViewModel.yearlyPoints) { point in
+            LineMark(
+                x: .value("Month", point.label),
+                y: .value("Pushups", point.count)
+            )
+            PointMark(
+                x: .value("Month", point.label),
+                y: .value("Pushups", point.count)
+            )
+        }
+        .frame(height: 220)
+        .chartYScale(domain: 0...Double(max(10, yearlyMax)))
+    }
+
+    private enum ChartKind {
+        case weekly, monthly, yearly
+    }
+
+    private func shareChart(_ kind: ChartKind) {
+        let content: AnyView
+        switch kind {
+        case .weekly:
+            content = AnyView(shareableChart(title: "Weekly Trend", subtitle: recapViewModel.weekLabel, chart: weeklyChartView))
+        case .monthly:
+            content = AnyView(shareableChart(title: "Monthly Trend", subtitle: recapViewModel.monthLabel, chart: monthlyChartView))
+        case .yearly:
+            content = AnyView(shareableChart(title: "Yearly Trend", subtitle: recapViewModel.yearLabel, chart: yearlyChartView))
+        }
+
+        let renderer = ImageRenderer(content: content.frame(width: UIScreen.main.bounds.width - 32))
+        renderer.scale = UIScreen.main.scale
+        if let image = renderer.uiImage {
+            shareImage = image
+            isSharing = true
+        }
+    }
+
+    private func shareableChart<Content: View>(title: String, subtitle: String, chart: Content) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(title)
+                .font(.headline)
+            Text(subtitle)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            chart
+        }
+        .padding()
+        .background(RoundedRectangle(cornerRadius: 16).fill(.ultraThinMaterial))
     }
 
     private var weeklyMax: Int {

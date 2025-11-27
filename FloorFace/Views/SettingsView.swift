@@ -33,6 +33,13 @@ struct SettingsView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
+
+                Section("About FloorFace") {
+                    Text("FloorFace keeps you honest on the floor. It was built and is maintained by Asray Gopa to make pushup tracking simple, offline, and fun.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .padding(.vertical, 4)
+                }
             }
             .navigationTitle("Settings")
             .onAppear {

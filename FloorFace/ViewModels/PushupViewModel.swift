@@ -18,7 +18,6 @@ final class PushupViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     private let dataStore: DataStore
-    private let notificationService: NotificationService
     private let calendar: Calendar
     private let dayFormatter: DateFormatter
 
@@ -26,11 +25,9 @@ final class PushupViewModel: ObservableObject {
 
     init(
         dataStore: DataStore = .shared,
-        notificationService: NotificationService = .shared,
         calendar: Calendar = .current
     ) {
         self.dataStore = dataStore
-        self.notificationService = notificationService
         self.calendar = calendar
 
         let formatter = DateFormatter()
@@ -52,7 +49,6 @@ final class PushupViewModel: ObservableObject {
             weeklyGoal = storedGoal
         }
         weeklyProgress = dataStore.totalForWeek(containing: Date())
-        notificationService.requestAuthorization()
     }
 
     func handleTouch() {
@@ -64,6 +60,14 @@ final class PushupViewModel: ObservableObject {
         }
         sessionCount += 1
         todayCount = dataStore.incrementDailyCount(for: Date(), by: 1)
+        weeklyProgress = dataStore.totalForWeek(containing: Date())
+        refreshStreak()
+    }
+
+    func handleDecrement() {
+        guard todayCount > 0 else { return }
+        todayCount = dataStore.decrementDailyCount(for: Date(), by: 1)
+        sessionCount = max(sessionCount - 1, 0)
         weeklyProgress = dataStore.totalForWeek(containing: Date())
         refreshStreak()
     }

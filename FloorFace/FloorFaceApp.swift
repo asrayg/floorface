@@ -12,6 +12,7 @@ struct NoseTapApp: App {
     @StateObject private var pushupViewModel = PushupViewModel()
     @StateObject private var recapViewModel = RecapViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
+    @StateObject private var appStateViewModel = AppStateViewModel()
 
     var body: some Scene {
         WindowGroup {
@@ -19,6 +20,7 @@ struct NoseTapApp: App {
                 .environmentObject(pushupViewModel)
                 .environmentObject(recapViewModel)
                 .environmentObject(settingsViewModel)
+                .environmentObject(appStateViewModel)
         }
     }
 }

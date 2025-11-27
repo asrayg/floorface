@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PushupDay: Identifiable, Codable {
+struct PushupDay: Identifiable {
     let id = UUID()
     let dateString: String
     let count: Int
