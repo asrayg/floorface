@@ -79,6 +79,12 @@ final class PushupViewModel: ObservableObject {
     func endSession() {
         guard isSessionActive else { return }
         isSessionActive = false
+        // Add an extra pushup when ending the session
+        if sessionCount > 0 {
+            todayCount = dataStore.incrementDailyCount(for: Date(), by: 1)
+            weeklyProgress = dataStore.totalForWeek(containing: Date())
+            refreshStreak()
+        }
         sessionCount = 0
     }
 
