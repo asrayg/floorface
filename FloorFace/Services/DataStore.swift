@@ -151,6 +151,22 @@ final class DataStore {
 
     // MARK: - Chart helpers
 
+    func weeklySeries(for date: Date = Date()) -> [(label: String, count: Int)] {
+        let counts = loadDailyCounts()
+        let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.dateFormat = "EEE"
+        let start = startOfWeek(for: date)
+        var result: [(String, Int)] = []
+        for offset in 0..<7 {
+            guard let dayDate = calendar.date(byAdding: .day, value: offset, to: start) else { continue }
+            let key = isoFormatter.string(from: dayDate)
+            let label = formatter.string(from: dayDate)
+            result.append((label, counts[key, default: 0]))
+        }
+        return result
+    }
+
     func dailySeries(forMonthContaining date: Date) -> [(day: Int, count: Int)] {
         let counts = loadDailyCounts()
         guard let range = calendar.range(of: .day, in: .month, for: date) else { return [] }

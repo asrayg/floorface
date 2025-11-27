@@ -26,11 +26,6 @@ struct HomeView: View {
                     Label("Stats", systemImage: "chart.bar.fill")
                 }
 
-            RecapView()
-                .tabItem {
-                    Label("Recaps", systemImage: "sparkles")
-                }
-
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gear")

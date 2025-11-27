@@ -80,52 +80,6 @@ final class PushupViewModel: ObservableObject {
         sessionCount = 0
     }
 
-    private func recordClip() {
-        isRecordingClip = true
-        videoRecorder.recordClip { [weak self] result in
-            Task { @MainActor in
-                guard let self else { return }
-                self.isRecordingClip = false
-                switch result {
-                case .success(let url):
-                    self.pendingVideoURL = url
-                    self.makeGIFIfPossible()
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                }
-            }
-        }
-    }
-
-    private func makeGIFIfPossible() {
-        guard let videoURL = pendingVideoURL else { return }
-        let destination = FileManager.default.temporaryDirectory
-            .appendingPathComponent(UUID().uuidString)
-            .appendingPathExtension("gif")
-
-        gifService.createGIFFromVideo(videoURL: videoURL, destinationURL: destination) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let gifURL):
-                do {
-                    let data = try Data(contentsOf: gifURL)
-                    let savedURL = try self.dataStore.saveGIF(data: data, for: Date())
-                    DispatchQueue.main.async {
-                        self.lastGIFURL = savedURL
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        self.errorMessage = error.localizedDescription
-                    }
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.errorMessage = error.localizedDescription
-                }
-            }
-        }
-    }
-
     // MARK: - Weekly Goal Helpers
 
     func updateWeeklyGoal(to value: Int) {
