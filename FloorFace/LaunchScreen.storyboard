@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LaunchScreenController">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LaunchScreenController">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
         <scene sceneID="LaunchScene">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="LaunchScreenController" id="LaunchScreenController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="view">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
@@ -24,13 +24,17 @@
                         <constraints>
                             <constraint firstItem="logoImage" firstAttribute="centerX" secondItem="view" secondAttribute="centerX" id="centerX"/>
                             <constraint firstItem="logoImage" firstAttribute="centerY" secondItem="view" secondAttribute="centerY" id="centerY"/>
-                            <constraint firstItem="logoImage" firstAttribute="width" constant="200" id="widthConstraint"/>
                             <constraint firstItem="logoImage" firstAttribute="height" constant="200" id="heightConstraint"/>
+                            <constraint firstItem="logoImage" firstAttribute="width" constant="200" id="widthConstraint"/>
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-22" y="-26"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FloorFace" width="1024" height="1024"/>
+    </resources>
 </document>
-
