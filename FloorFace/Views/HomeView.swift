@@ -37,8 +37,7 @@ struct HomeView: View {
                 }
         }
         .onAppear {
-            recapViewModel.generateMonthlyRecap()
-            recapViewModel.generateYearlyRecap()
+            recapViewModel.refresh()
             settingsViewModel.evaluateGoalPrompt()
             goalInput = Double(settingsViewModel.currentGoal)
         }

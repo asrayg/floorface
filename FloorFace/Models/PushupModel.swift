@@ -13,20 +13,6 @@ struct PushupDay: Identifiable, Codable {
     let count: Int
 }
 
-struct PushupSession: Identifiable, Codable {
-    let id: UUID
-    let startedAt: Date
-    let count: Int
-    let gifURL: URL?
-
-    init(id: UUID = UUID(), startedAt: Date = Date(), count: Int, gifURL: URL?) {
-        self.id = id
-        self.startedAt = startedAt
-        self.count = count
-        self.gifURL = gifURL
-    }
-}
-
 struct WeeklyGoal: Codable {
     var target: Int
     var weekOfYear: Int
@@ -38,10 +24,5 @@ struct WeeklyGoal: Codable {
         self.weekOfYear = calendar.component(.weekOfYear, from: referenceDate)
         self.yearForWeekOfYear = calendar.component(.yearForWeekOfYear, from: referenceDate)
     }
-}
-
-enum RecapType: String, Codable {
-    case monthly
-    case yearly
 }
 

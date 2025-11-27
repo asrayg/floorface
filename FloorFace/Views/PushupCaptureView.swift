@@ -12,23 +12,15 @@ struct PushupCaptureView: View {
 
     var body: some View {
         ZStack {
-            if viewModel.isCameraAuthorized, let session = viewModel.previewSession {
-                CameraPreviewView(session: session)
-                    .ignoresSafeArea()
-            } else {
-                Color.black
-                    .ignoresSafeArea()
-            }
-
             LinearGradient(
-                colors: [.black.opacity(0.8), .clear],
-                startPoint: .top,
-                endPoint: .bottom
+                colors: [.black, .purple.opacity(0.7)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
 
-            VStack(spacing: 24) {
-                VStack {
+            VStack(spacing: 32) {
+                VStack(spacing: 8) {
                     Text("Today")
                         .font(.title3)
                         .foregroundStyle(.secondary)
@@ -37,19 +29,13 @@ struct PushupCaptureView: View {
                         .foregroundStyle(.white)
                 }
 
-                VStack {
+                VStack(spacing: 8) {
                     Text("Live session")
                         .font(.headline)
                         .foregroundStyle(.secondary)
                     Text("\(viewModel.sessionCount)")
                         .font(.system(size: 56, weight: .semibold, design: .rounded))
                         .foregroundStyle(.white)
-                }
-
-                if viewModel.isRecordingClip {
-                    Label("Recording mini video…", systemImage: "video.fill")
-                        .font(.subheadline)
-                        .foregroundStyle(.yellow)
                 }
 
                 Button {
@@ -63,8 +49,6 @@ struct PushupCaptureView: View {
                         .cornerRadius(16)
                 }
                 .padding(.horizontal)
-
-                cameraPermissionOverlay
             }
             .padding()
         }
@@ -81,61 +65,6 @@ struct PushupCaptureView: View {
                     viewModel.handleTouch()
                 }
         )
-        .alert("Recording error", isPresented: Binding(
-            get: { viewModel.errorMessage != nil },
-            set: { isPresented in
-                if !isPresented {
-                    viewModel.errorMessage = nil
-                }
-            }
-        )) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text(viewModel.errorMessage ?? "")
-        }
-        .onAppear {
-            viewModel.evaluateCameraPermission()
-            viewModel.startCameraPreview()
-        }
-        .onDisappear {
-            viewModel.stopCameraPreview()
-        }
-    }
-
-    @ViewBuilder
-    private var cameraPermissionOverlay: some View {
-        if viewModel.cameraPermissionStatus != .authorized {
-            VStack(spacing: 12) {
-                Text("Camera access is disabled")
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-                Text("Enable the front camera to see live video and save GIFs from each session.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                Button {
-                    viewModel.requestCameraAccess()
-                } label: {
-                    Text("Enable Camera Access")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundStyle(.white)
-                        .cornerRadius(12)
-                }
-                .padding(.horizontal)
-            }
-            .padding()
-            .background(.ultraThinMaterial)
-            .cornerRadius(20)
-            .padding()
-        } else if viewModel.previewSession == nil {
-            Text("Camera unavailable on this device.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-        }
     }
 }
 
@@ -143,4 +72,3 @@ struct PushupCaptureView: View {
     PushupCaptureView()
         .environmentObject(PushupViewModel())
 }
-

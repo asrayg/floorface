@@ -55,10 +55,6 @@ final class SettingsViewModel: ObservableObject {
         return calendar.compare(lastPrompt, to: date, toGranularity: .weekOfYear) != .orderedSame
     }
 
-    func availableGIFs() -> [URL] {
-        dataStore.gifURLs().sorted(by: { $0.lastPathComponent > $1.lastPathComponent })
-    }
-
     private static func defaultSuggestedGoal(from goal: Int) -> Int {
         max(Int(Double(goal) * 1.1), goal + 5)
     }
