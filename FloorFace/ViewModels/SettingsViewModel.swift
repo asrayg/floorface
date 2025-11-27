@@ -1,6 +1,6 @@
 //
 //  SettingsViewModel.swift
-//  NoseTap
+//  FloorFace
 //
 //  Manages weekly goals, prompts, and sharing helpers.
 //

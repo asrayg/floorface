@@ -1,6 +1,6 @@
 //
 //  PushupModel.swift
-//  NoseTap
+//  FloorFace
 //
 //  Data structures that describe pushup activity and configuration.
 //

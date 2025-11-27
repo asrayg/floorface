@@ -13,11 +13,9 @@
 		871E05CB2ED8233A00318BA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 871E05CA2ED8233A00318BA8 /* Preview Assets.xcassets */; };
 		871E05CD2ED8233A00318BA8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E05CC2ED8233A00318BA8 /* Persistence.swift */; };
 		871E05D02ED8233A00318BA8 /* FloorFace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 871E05CE2ED8233A00318BA8 /* FloorFace.xcdatamodeld */; };
-		A1E002032EDC549000000001 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E002022EDC549000000001 /* LaunchScreen.storyboard */; };
 		A1E001012ED9000000000001 /* PushupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001002ED9000000000001 /* PushupModel.swift */; };
 		A1E001052ED9000000000001 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001042ED9000000000001 /* DataStore.swift */; };
 		A1E0010B2ED9000000000001 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0010A2ED9000000000001 /* NotificationService.swift */; };
-		A1E002012EDC530000000001 /* AppStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002002EDC530000000001 /* AppStateViewModel.swift */; };
 		A1E0010F2ED9000000000001 /* PushupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0010E2ED9000000000001 /* PushupViewModel.swift */; };
 		A1E001112ED9000000000001 /* RecapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001102ED9000000000001 /* RecapViewModel.swift */; };
 		A1E001132ED9000000000001 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001122ED9000000000001 /* SettingsViewModel.swift */; };
@@ -26,7 +24,9 @@
 		A1E001192ED9000000000001 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001182ED9000000000001 /* StatsView.swift */; };
 		A1E0011D2ED9000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0011C2ED9000000000001 /* SettingsView.swift */; };
 		A1E002002EDC4F0000000001 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001FF2EDC4F0000000001 /* ShareSheet.swift */; };
+		A1E002012EDC530000000001 /* AppStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002002EDC530000000001 /* AppStateViewModel.swift */; };
 		A1E002022EDC53F000000001 /* NotificationPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002012EDC53F000000001 /* NotificationPromptView.swift */; };
+		A1E002032EDC549000000001 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E002022EDC549000000001 /* LaunchScreen.storyboard */; };
 		A1E002062EDC58C000000001 /* CameraPreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002052EDC58C000000001 /* CameraPreviewManager.swift */; };
 		A1E002082EDC5B0000000001 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E002072EDC5B0000000001 /* CameraPreviewView.swift */; };
 /* End PBXBuildFile section */
@@ -41,18 +41,18 @@
 		871E05CF2ED8233A00318BA8 /* FloorFace.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FloorFace.xcdatamodel; sourceTree = "<group>"; };
 		A1E001002ED9000000000001 /* PushupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushupModel.swift; sourceTree = "<group>"; };
 		A1E001042ED9000000000001 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		A1E002022EDC549000000001 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1E0010A2ED9000000000001 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		A1E0010E2ED9000000000001 /* PushupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushupViewModel.swift; sourceTree = "<group>"; };
 		A1E001102ED9000000000001 /* RecapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapViewModel.swift; sourceTree = "<group>"; };
 		A1E001122ED9000000000001 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		A1E002002EDC530000000001 /* AppStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateViewModel.swift; sourceTree = "<group>"; };
 		A1E001142ED9000000000001 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A1E001162ED9000000000001 /* PushupCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushupCaptureView.swift; sourceTree = "<group>"; };
 		A1E001182ED9000000000001 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		A1E0011C2ED9000000000001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A1E001FF2EDC4F0000000001 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		A1E002002EDC530000000001 /* AppStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateViewModel.swift; sourceTree = "<group>"; };
 		A1E002012EDC53F000000001 /* NotificationPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPromptView.swift; sourceTree = "<group>"; };
+		A1E002022EDC549000000001 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1E002052EDC58C000000001 /* CameraPreviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewManager.swift; sourceTree = "<group>"; };
 		A1E002072EDC5B0000000001 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -382,18 +382,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"FloorFace/Preview Content\"";
 				DEVELOPMENT_TEAM = L6LUXM357X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = FloorFace;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSCameraUsageDescription = "FloorFace uses the camera to show a live preview while you track your pushups.";
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Daily reminders make it easier to stay on track with pushups.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSCameraUsageDescription = "NoseTap records short clips to convert them into GIFs for your pushup log.";
-				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Daily reminders make it easier to stay on track with pushups.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -413,18 +416,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"FloorFace/Preview Content\"";
 				DEVELOPMENT_TEAM = L6LUXM357X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = FloorFace;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSCameraUsageDescription = "NoseTap uses the camera to show a live preview while you track your pushups.";
+				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Daily reminders make it easier to stay on track with pushups.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSCameraUsageDescription = "NoseTap records short clips to convert them into GIFs for your pushup log.";
-				INFOPLIST_KEY_NSUserNotificationsUsageDescription = "Daily reminders make it easier to stay on track with pushups.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

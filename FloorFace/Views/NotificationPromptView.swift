@@ -1,6 +1,6 @@
 //
 //  NotificationPromptView.swift
-//  NoseTap
+//  FloorFace
 //
 //  Modal shown on first launch to opt into reminders.
 //
@@ -21,7 +21,7 @@ struct NotificationPromptView: View {
                 .font(.title2)
                 .bold()
 
-            Text("Enable reminders so NoseTap can nudge you for daily sessions and Sunday goal check-ins. You can always change this later in Settings.")
+            Text("Enable reminders so FloorFace can nudge you for daily sessions and Sunday goal check-ins. You can always change this later in Settings.")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
 

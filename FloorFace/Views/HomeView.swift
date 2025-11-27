@@ -1,8 +1,8 @@
 //
 //  HomeView.swift
-//  NoseTap
+//  FloorFace
 //
-//  Root tab layout for NoseTap.
+//  Root tab layout for FloorFace.
 //
 
 import SwiftUI

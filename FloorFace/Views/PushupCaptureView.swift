@@ -1,8 +1,8 @@
 //
 //  PushupCaptureView.swift
-//  NoseTap
+//  FloorFace
 //
-//  Full-screen capture surface for nose taps.
+//  Full-screen capture surface for FloorFace.
 //
 
 import SwiftUI

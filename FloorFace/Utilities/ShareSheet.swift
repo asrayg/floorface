@@ -1,6 +1,6 @@
 //
 //  ShareSheet.swift
-//  NoseTap
+//  FloorFace
 //
 //  Simple wrapper for UIActivityViewController.
 //

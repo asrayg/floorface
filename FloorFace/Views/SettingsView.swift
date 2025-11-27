@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  NoseTap
+//  FloorFace
 //
 //  Houses goal controls, notifications, and sharing.
 //

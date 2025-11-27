@@ -1,6 +1,6 @@
 //
 //  PushupViewModel.swift
-//  NoseTap
+//  FloorFace
 //
 //  Handles live pushup capture, persistence, and media creation.
 //

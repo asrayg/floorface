@@ -1,6 +1,6 @@
 //
 //  AppStateViewModel.swift
-//  NoseTap
+//  FloorFace
 //
 //  Tracks app-wide prompts such as notification permissions.
 //

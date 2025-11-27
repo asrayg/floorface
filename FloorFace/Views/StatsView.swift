@@ -1,6 +1,6 @@
 //
 //  StatsView.swift
-//  NoseTap
+//  FloorFace
 //
 //  Displays weekly goal progress and trend lines for week, month, and year.
 //

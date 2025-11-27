@@ -1,6 +1,6 @@
 //
 //  CameraPreviewView.swift
-//  NoseTap
+//  FloorFace
 //
 //  UIKit wrapper to show an AVCaptureSession.
 //

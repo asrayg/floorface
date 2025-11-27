@@ -1,6 +1,6 @@
 //
 //  NotificationService.swift
-//  NoseTap
+//  FloorFace
 //
 //  Handles local notification scheduling for daily reminders.
 //
@@ -42,7 +42,7 @@ final class NotificationService {
 
         let content = UNMutableNotificationContent()
         content.title = "Time for today’s pushups!"
-        content.body = "NoseTap is ready."
+        content.body = "FloorFace is ready."
         content.sound = .default
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
