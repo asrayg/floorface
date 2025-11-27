@@ -52,12 +52,10 @@ final class PushupViewModel: ObservableObject {
     }
 
     func handleTouch() {
+        guard isSessionActive else { return }
         let now = Date().timeIntervalSince1970
         guard now - lastTouchTimestamp > 0.3 else { return }
         lastTouchTimestamp = now
-        if !isSessionActive {
-            startSession()
-        }
         sessionCount += 1
         todayCount = dataStore.incrementDailyCount(for: Date(), by: 1)
         weeklyProgress = dataStore.totalForWeek(containing: Date())

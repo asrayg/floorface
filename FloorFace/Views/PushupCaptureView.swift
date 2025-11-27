@@ -36,8 +36,7 @@ struct PushupCaptureView: View {
                     Text("Today's Pushups")
                         .font(.headline)
                         .foregroundStyle(.secondary)
-                    HStack(spacing: 24) {
-                        
+                    HStack(spacing: 24) {                        
                         Text("\(viewModel.todayCount)")
                             .font(.system(size: 72, weight: .heavy, design: .rounded))
                             .foregroundStyle(.white)
@@ -45,26 +44,36 @@ struct PushupCaptureView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
 
-                VStack(spacing: 8) {
-                    Text("Live session")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                    Text("\(viewModel.sessionCount)")
-                        .font(.system(size: 56, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.white)
-                }
+                if viewModel.isSessionActive {
+                    VStack(spacing: 8) {
+                        Text("Live session")
+                            .font(.headline)
+                            .foregroundStyle(.secondary)
+                        Text("\(viewModel.sessionCount)")
+                            .font(.system(size: 56, weight: .semibold, design: .rounded))
+                            .foregroundStyle(.white)
+                    }
 
-                Button {
-                    viewModel.endSession()
-                } label: {
-                    Text("End Session")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.red.opacity(0.8))
-                        .foregroundStyle(.white)
-                        .cornerRadius(16)
+                    Button {
+                        viewModel.endSession()
+                        cameraManager.stopSession()
+                    } label: {
+                        Text("End Session")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.red.opacity(0.8))
+                            .foregroundStyle(.white)
+                            .cornerRadius(16)
+                    }
+                    .padding(.horizontal)
+                } else {
+                    VStack(spacing: 16) {
+                        Text("Tap the start button to begin")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .padding(.top, 40)
+                    }
                 }
-                .padding(.horizontal)
             }
             .padding()
         }
@@ -72,23 +81,43 @@ struct PushupCaptureView: View {
         .gesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { _ in
-                    viewModel.handleTouch()
+                    if viewModel.isSessionActive {
+                        viewModel.handleTouch()
+                    }
                 }
         )
         .simultaneousGesture(
             TapGesture()
                 .onEnded {
-                    viewModel.handleTouch()
+                    if viewModel.isSessionActive {
+                        viewModel.handleTouch()
+                    }
                 }
         )
         .onAppear {
             checkCameraPermission()
-            if cameraPermissionStatus == .authorized {
-                cameraManager.startSession()
-            }
         }
         .onDisappear {
             cameraManager.stopSession()
+        }
+        .overlay(alignment: .topTrailing) {
+            if !viewModel.isSessionActive {
+                Button {
+                    viewModel.startSession()
+                    if cameraPermissionStatus == .authorized {
+                        cameraManager.startSession()
+                    }
+                } label: {
+                    Image(systemName: "play.circle.fill")
+                        .font(.title2)
+                        .foregroundStyle(.white)
+                        .padding(8)
+                        .background(Color.green.opacity(0.8))
+                        .clipShape(Circle())
+                }
+                .padding(.top, 60)
+                .padding(.trailing, 20)
+            }
         }
         .overlay(alignment: .bottom) {
             if cameraPermissionStatus != .authorized {
