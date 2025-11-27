@@ -170,6 +170,9 @@ struct StatsView: View {
 
     private func shareChart(_ kind: ChartKind) {
         let content: AnyView
+        let chartWidth: CGFloat = 800
+        let chartHeight: CGFloat = 500
+        
         switch kind {
         case .weekly:
             content = AnyView(shareableChart(title: "Weekly Trend", subtitle: recapViewModel.weekLabel, chart: weeklyChartView))
@@ -179,8 +182,9 @@ struct StatsView: View {
             content = AnyView(shareableChart(title: "Yearly Trend", subtitle: recapViewModel.yearLabel, chart: yearlyChartView))
         }
 
-        let renderer = ImageRenderer(content: content.frame(width: UIScreen.main.bounds.width - 32))
-        renderer.scale = UIScreen.main.scale
+        let renderer = ImageRenderer(content: content.frame(width: chartWidth, height: chartHeight))
+        renderer.scale = 2.0 // Use 2x scale for better quality
+        
         if let image = renderer.uiImage {
             shareImage = image
             isSharing = true
@@ -195,9 +199,11 @@ struct StatsView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             chart
+                .frame(height: 300)
         }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 16).fill(.ultraThinMaterial))
+        .padding(20)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(Color.white)
     }
 
     private var weeklyMax: Int {
