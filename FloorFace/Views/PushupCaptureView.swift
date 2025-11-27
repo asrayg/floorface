@@ -21,8 +21,8 @@ struct PushupCaptureView: View {
 
             VStack(spacing: 32) {
                 VStack(spacing: 8) {
-                    Text("Today")
-                        .font(.title3)
+                    Text("Today's Pushups")
+                        .font(.headline)
                         .foregroundStyle(.secondary)
                     Text("\(viewModel.todayCount)")
                         .font(.system(size: 72, weight: .heavy, design: .rounded))
@@ -66,6 +66,7 @@ struct PushupCaptureView: View {
                 }
         )
     }
+
 }
 
 #Preview {

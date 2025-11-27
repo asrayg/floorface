@@ -22,7 +22,6 @@
 		A1E001152ED9000000000001 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001142ED9000000000001 /* HomeView.swift */; };
 		A1E001172ED9000000000001 /* PushupCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001162ED9000000000001 /* PushupCaptureView.swift */; };
 		A1E001192ED9000000000001 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E001182ED9000000000001 /* StatsView.swift */; };
-		A1E0011B2ED9000000000001 /* RecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0011A2ED9000000000001 /* RecapView.swift */; };
 		A1E0011D2ED9000000000001 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E0011C2ED9000000000001 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +42,6 @@
 		A1E001142ED9000000000001 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A1E001162ED9000000000001 /* PushupCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushupCaptureView.swift; sourceTree = "<group>"; };
 		A1E001182ED9000000000001 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
-		A1E0011A2ED9000000000001 /* RecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapView.swift; sourceTree = "<group>"; };
 		A1E0011C2ED9000000000001 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +122,6 @@
 				A1E001142ED9000000000001 /* HomeView.swift */,
 				A1E001162ED9000000000001 /* PushupCaptureView.swift */,
 				A1E001182ED9000000000001 /* StatsView.swift */,
-				A1E0011A2ED9000000000001 /* RecapView.swift */,
 				A1E0011C2ED9000000000001 /* SettingsView.swift */,
 			);
 			path = Views;
@@ -229,7 +226,6 @@
 				A1E001152ED9000000000001 /* HomeView.swift in Sources */,
 				A1E001172ED9000000000001 /* PushupCaptureView.swift in Sources */,
 				A1E001192ED9000000000001 /* StatsView.swift in Sources */,
-				A1E0011B2ED9000000000001 /* RecapView.swift in Sources */,
 				A1E0011D2ED9000000000001 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

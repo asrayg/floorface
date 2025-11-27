@@ -26,6 +26,12 @@ struct SettingsView: View {
                         settingsViewModel.setWeeklyGoal(goal)
                         pushupViewModel.updateWeeklyGoal(to: goal)
                     }
+                    .disabled(Int(sliderValue) == settingsViewModel.currentGoal)
+                    if Int(sliderValue) == settingsViewModel.currentGoal {
+                        Text("Current goal already set")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
             .navigationTitle("Settings")

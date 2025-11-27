@@ -80,6 +80,13 @@ final class PushupViewModel: ObservableObject {
         sessionCount = 0
     }
 
+    func refreshStoredProgress() {
+        let counts = dataStore.loadDailyCounts()
+        let key = dayFormatter.string(from: Date())
+        todayCount = counts[key, default: 0]
+        weeklyProgress = dataStore.totalForWeek(containing: Date())
+    }
+
     // MARK: - Weekly Goal Helpers
 
     func updateWeeklyGoal(to value: Int) {

@@ -52,15 +52,15 @@ final class DataStore {
 
     func totalForWeek(containing date: Date) -> Int {
         let counts = loadDailyCounts()
-        guard let weekRange = calendar.range(of: .day, in: .weekOfYear, for: date) else { return 0 }
-        var result = 0
-        for day in weekRange {
-            if let dayDate = calendar.date(byAdding: .day, value: day - 1, to: startOfWeek(for: date)),
-               let count = counts[isoFormatter.string(from: dayDate)] {
-                result += count
+        let start = startOfWeek(for: date)
+        var total = 0
+        for offset in 0..<7 {
+            if let dayDate = calendar.date(byAdding: .day, value: offset, to: start) {
+                let key = isoFormatter.string(from: dayDate)
+                total += counts[key, default: 0]
             }
         }
-        return result
+        return total
     }
 
     func totalForMonth(containing date: Date) -> (total: Int, bestDay: (Date, Int)?) {
