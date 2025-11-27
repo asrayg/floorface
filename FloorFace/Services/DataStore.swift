@@ -1,0 +1,199 @@
+//
+//  DataStore.swift
+//  NoseTap
+//
+//  Centralized persistence helper for UserDefaults and local files.
+//
+
+import Foundation
+final class DataStore {
+    static let shared = DataStore()
+
+    private enum Key {
+        static let dailyPushups = "dailyPushups"
+        static let weeklyGoal = "weeklyGoal"
+        static let lastGoalPrompt = "lastGoalPrompt"
+        static let streakCount = "streakCount"
+    }
+
+    private let defaults: UserDefaults
+    private let calendar: Calendar
+    private let isoFormatter: DateFormatter
+
+    private init(defaults: UserDefaults = .standard, calendar: Calendar = .current) {
+        self.defaults = defaults
+        self.calendar = calendar
+
+        let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.dateFormat = "yyyy-MM-dd"
+        self.isoFormatter = formatter
+
+    }
+
+    // MARK: - Daily counts
+
+    func loadDailyCounts() -> [String: Int] {
+        defaults.dictionary(forKey: Key.dailyPushups) as? [String: Int] ?? [:]
+    }
+
+    func saveDailyCounts(_ counts: [String: Int]) {
+        defaults.set(counts, forKey: Key.dailyPushups)
+    }
+
+    @discardableResult
+    func incrementDailyCount(for date: Date, by amount: Int) -> Int {
+        let key = isoFormatter.string(from: date)
+        var counts = loadDailyCounts()
+        counts[key, default: 0] += amount
+        saveDailyCounts(counts)
+        return counts[key, default: 0]
+    }
+
+    func totalForWeek(containing date: Date) -> Int {
+        let counts = loadDailyCounts()
+        guard let weekRange = calendar.range(of: .day, in: .weekOfYear, for: date) else { return 0 }
+        var result = 0
+        for day in weekRange {
+            if let dayDate = calendar.date(byAdding: .day, value: day - 1, to: startOfWeek(for: date)),
+               let count = counts[isoFormatter.string(from: dayDate)] {
+                result += count
+            }
+        }
+        return result
+    }
+
+    func totalForMonth(containing date: Date) -> (total: Int, bestDay: (Date, Int)?) {
+        let counts = loadDailyCounts()
+        guard let range = calendar.range(of: .day, in: .month, for: date) else { return (0, nil) }
+        let first = startOfMonth(for: date)
+        var total = 0
+        var best: (Date, Int)?
+        for day in range {
+            if let dayDate = calendar.date(byAdding: .day, value: day - 1, to: first) {
+                let key = isoFormatter.string(from: dayDate)
+                let count = counts[key, default: 0]
+                total += count
+                if let currentBest = best {
+                    if count > currentBest.1 {
+                        best = (dayDate, count)
+                    }
+                } else if count > 0 {
+                    best = (dayDate, count)
+                }
+            }
+        }
+        return (total, best)
+    }
+
+    func totalForYear(_ year: Int) -> (total: Int, bestMonth: (Int, Int)?) {
+        let counts = loadDailyCounts()
+        var total = 0
+        var best: (Int, Int)?
+        for month in 1...12 {
+            var monthTotal = 0
+            var comps = DateComponents()
+            comps.year = year
+            comps.month = month
+            comps.day = 1
+            guard let monthDate = calendar.date(from: comps),
+                  let range = calendar.range(of: .day, in: .month, for: monthDate)
+            else { continue }
+
+            for day in range {
+                comps.day = day
+                if let dayDate = calendar.date(from: comps) {
+                    let key = isoFormatter.string(from: dayDate)
+                    monthTotal += counts[key, default: 0]
+                }
+            }
+            total += monthTotal
+            if let currentBest = best {
+                if monthTotal > currentBest.1 {
+                    best = (month, monthTotal)
+                }
+            } else if monthTotal > 0 {
+                best = (month, monthTotal)
+            }
+        }
+
+        if total == 0 {
+            return (0, nil)
+        }
+        return (total, best)
+    }
+
+    // MARK: - Weekly goal
+
+    func weeklyGoal() -> Int {
+        defaults.integer(forKey: Key.weeklyGoal)
+    }
+
+    func updateWeeklyGoal(_ value: Int) {
+        defaults.set(value, forKey: Key.weeklyGoal)
+    }
+
+    func lastGoalPromptDate() -> Date? {
+        defaults.object(forKey: Key.lastGoalPrompt) as? Date
+    }
+
+    func setLastGoalPrompt(_ date: Date) {
+        defaults.set(date, forKey: Key.lastGoalPrompt)
+    }
+
+    func streakCount() -> Int {
+        defaults.integer(forKey: Key.streakCount)
+    }
+
+    func updateStreak(_ value: Int) {
+        defaults.set(value, forKey: Key.streakCount)
+    }
+
+    // MARK: - Chart helpers
+
+    func dailySeries(forMonthContaining date: Date) -> [(day: Int, count: Int)] {
+        let counts = loadDailyCounts()
+        guard let range = calendar.range(of: .day, in: .month, for: date) else { return [] }
+        let first = startOfMonth(for: date)
+        return range.compactMap { day -> (Int, Int)? in
+            guard let dayDate = calendar.date(byAdding: .day, value: day - 1, to: first) else { return nil }
+            let key = isoFormatter.string(from: dayDate)
+            return (day, counts[key, default: 0])
+        }
+    }
+
+    func monthlySeries(for year: Int) -> [(month: Int, count: Int)] {
+        let counts = loadDailyCounts()
+        var result: [(Int, Int)] = []
+        for month in 1...12 {
+            var comps = DateComponents()
+            comps.year = year
+            comps.month = month
+            comps.day = 1
+            guard let monthDate = calendar.date(from: comps),
+                  let range = calendar.range(of: .day, in: .month, for: monthDate) else { continue }
+            var total = 0
+            for day in range {
+                comps.day = day
+                if let dayDate = calendar.date(from: comps) {
+                    let key = isoFormatter.string(from: dayDate)
+                    total += counts[key, default: 0]
+                }
+            }
+            result.append((month, total))
+        }
+        return result
+    }
+
+    // MARK: - Helpers
+
+    private func startOfWeek(for date: Date) -> Date {
+        calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)) ?? date
+    }
+
+    private func startOfMonth(for date: Date) -> Date {
+        let comps = calendar.dateComponents([.year, .month], from: date)
+        return calendar.date(from: comps) ?? date
+    }
+}
+

@@ -8,13 +8,17 @@
 import SwiftUI
 
 @main
-struct FloorFaceApp: App {
-    let persistenceController = PersistenceController.shared
+struct NoseTapApp: App {
+    @StateObject private var pushupViewModel = PushupViewModel()
+    @StateObject private var recapViewModel = RecapViewModel()
+    @StateObject private var settingsViewModel = SettingsViewModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            HomeView()
+                .environmentObject(pushupViewModel)
+                .environmentObject(recapViewModel)
+                .environmentObject(settingsViewModel)
         }
     }
 }
