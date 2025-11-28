@@ -1,10 +1,3 @@
-//
-//  CameraPreviewView.swift
-//  FloorFace
-//
-//  UIKit wrapper to show an AVCaptureSession.
-//
-
 import AVFoundation
 import SwiftUI
 

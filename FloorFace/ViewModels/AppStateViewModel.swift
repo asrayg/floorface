@@ -1,10 +1,3 @@
-//
-//  AppStateViewModel.swift
-//  FloorFace
-//
-//  Tracks app-wide prompts such as notification permissions.
-//
-
 import Foundation
 
 @MainActor

@@ -1,10 +1,3 @@
-//
-//  FloorFaceApp.swift
-//  FloorFace
-//
-//  Created by Asray Gopa on 11/26/25.
-//
-
 import SwiftUI
 
 @main

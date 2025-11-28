@@ -1,10 +1,3 @@
-//
-//  ShareSheet.swift
-//  FloorFace
-//
-//  Simple wrapper for UIActivityViewController.
-//
-
 import SwiftUI
 
 struct ShareSheet: UIViewControllerRepresentable {

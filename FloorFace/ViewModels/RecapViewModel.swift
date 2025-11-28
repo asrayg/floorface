@@ -1,10 +1,3 @@
-//
-//  RecapViewModel.swift
-//  FloorFace
-//
-//  Provides data points for weekly, monthly, and yearly charts.
-//
-
 import Foundation
 
 struct WeeklyLinePoint: Identifiable {

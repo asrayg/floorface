@@ -1,10 +1,3 @@
-//
-//  NotificationService.swift
-//  FloorFace
-//
-//  Handles local notification scheduling for daily reminders.
-//
-
 import Foundation
 import UserNotifications
 
@@ -55,7 +48,7 @@ final class NotificationService {
         center.removePendingNotificationRequests(withIdentifiers: ["weeklyGoalReminder"])
 
         var comps = DateComponents()
-        comps.weekday = 1 // Sunday
+        comps.weekday = 1
         comps.hour = 9
 
         let content = UNMutableNotificationContent()

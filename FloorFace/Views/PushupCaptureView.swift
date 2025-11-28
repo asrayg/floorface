@@ -1,10 +1,3 @@
-//
-//  PushupCaptureView.swift
-//  FloorFace
-//
-//  Full-screen capture surface for FloorFace.
-//
-
 import SwiftUI
 import AVFoundation
 
@@ -27,7 +20,6 @@ struct PushupCaptureView: View {
                 .ignoresSafeArea()
             }
             
-            // Semi-transparent overlay to keep text readable
             Color.black.opacity(0.3)
                 .ignoresSafeArea()
 
@@ -72,7 +64,6 @@ struct PushupCaptureView: View {
                     }
                 }
                 
-                // Toggle button for start/end session
                 Button {
                     if viewModel.isSessionActive {
                         viewModel.endSession()

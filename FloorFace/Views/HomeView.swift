@@ -1,10 +1,3 @@
-//
-//  HomeView.swift
-//  FloorFace
-//
-//  Root tab layout for FloorFace.
-//
-
 import SwiftUI
 
 struct HomeView: View {

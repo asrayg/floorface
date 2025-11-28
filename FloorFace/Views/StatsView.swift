@@ -1,10 +1,3 @@
-//
-//  StatsView.swift
-//  FloorFace
-//
-//  Displays weekly goal progress and trend lines for week, month, and year.
-//
-
 import Charts
 import SwiftUI
 import UIKit
@@ -183,7 +176,7 @@ struct StatsView: View {
         }
 
         let renderer = ImageRenderer(content: content.frame(width: chartWidth, height: chartHeight))
-        renderer.scale = 2.0 // Use 2x scale for better quality
+        renderer.scale = 2.0
         
         if let image = renderer.uiImage {
             shareImage = image

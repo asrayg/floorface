@@ -1,10 +1,3 @@
-//
-//  SettingsView.swift
-//  FloorFace
-//
-//  Houses goal controls, notifications, and sharing.
-//
-
 import SwiftUI
 
 struct SettingsView: View {

@@ -1,10 +1,3 @@
-//
-//  PushupViewModel.swift
-//  FloorFace
-//
-//  Handles live pushup capture, persistence, and media creation.
-//
-
 import Combine
 import Foundation
 
@@ -79,7 +72,6 @@ final class PushupViewModel: ObservableObject {
     func endSession() {
         guard isSessionActive else { return }
         isSessionActive = false
-        // Add an extra pushup when ending the session
         if sessionCount > 0 {
             todayCount = dataStore.incrementDailyCount(for: Date(), by: 1)
             weeklyProgress = dataStore.totalForWeek(containing: Date())
@@ -95,14 +87,10 @@ final class PushupViewModel: ObservableObject {
         weeklyProgress = dataStore.totalForWeek(containing: Date())
     }
 
-    // MARK: - Weekly Goal Helpers
-
     func updateWeeklyGoal(to value: Int) {
         weeklyGoal = value
         dataStore.updateWeeklyGoal(value)
     }
-
-    // MARK: - Streaks
 
     private func refreshStreak() {
         let counts = dataStore.loadDailyCounts()

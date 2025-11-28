@@ -1,10 +1,3 @@
-//
-//  DataStore.swift
-//  FloorFace
-//
-//  Centralized persistence helper for UserDefaults and local files.
-//
-
 import Foundation
 final class DataStore {
     static let shared = DataStore()
@@ -32,8 +25,6 @@ final class DataStore {
         self.isoFormatter = formatter
 
     }
-
-    // MARK: - Daily counts
 
     func loadDailyCounts() -> [String: Int] {
         defaults.dictionary(forKey: Key.dailyPushups) as? [String: Int] ?? [:]
@@ -135,8 +126,6 @@ final class DataStore {
         return (total, best)
     }
 
-    // MARK: - Weekly goal
-
     func weeklyGoal() -> Int {
         defaults.integer(forKey: Key.weeklyGoal)
     }
@@ -176,8 +165,6 @@ final class DataStore {
     func setNotificationsEnabled(_ value: Bool) {
         defaults.set(value, forKey: Key.notificationsEnabled)
     }
-
-    // MARK: - Chart helpers
 
     func weeklySeries(for date: Date = Date()) -> [(label: String, count: Int)] {
         let counts = loadDailyCounts()
@@ -228,8 +215,6 @@ final class DataStore {
         }
         return result
     }
-
-    // MARK: - Helpers
 
     private func startOfWeek(for date: Date) -> Date {
         calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)) ?? date

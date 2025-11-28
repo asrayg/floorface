@@ -1,10 +1,3 @@
-//
-//  SettingsViewModel.swift
-//  FloorFace
-//
-//  Manages weekly goals, prompts, and sharing helpers.
-//
-
 import Foundation
 
 @MainActor
@@ -50,7 +43,7 @@ final class SettingsViewModel: ObservableObject {
 
     func shouldPrompt(for date: Date) -> Bool {
         let weekday = calendar.component(.weekday, from: date)
-        guard weekday == 1 else { return false } // Sunday
+        guard weekday == 1 else { return false }
         guard let lastPrompt = dataStore.lastGoalPromptDate() else { return true }
         return calendar.compare(lastPrompt, to: date, toGranularity: .weekOfYear) != .orderedSame
     }

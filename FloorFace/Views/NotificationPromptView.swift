@@ -1,10 +1,3 @@
-//
-//  NotificationPromptView.swift
-//  FloorFace
-//
-//  Modal shown on first launch to opt into reminders.
-//
-
 import SwiftUI
 
 struct NotificationPromptView: View {

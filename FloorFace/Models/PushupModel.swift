@@ -1,10 +1,3 @@
-//
-//  PushupModel.swift
-//  FloorFace
-//
-//  Data structures that describe pushup activity and configuration.
-//
-
 import Foundation
 
 struct PushupDay: Identifiable {
