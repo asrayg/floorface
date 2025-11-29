@@ -14,9 +14,9 @@ final class SettingsViewModel: ObservableObject {
         self.calendar = calendar
         let storedGoal = dataStore.weeklyGoal()
         if storedGoal == 0 {
-            dataStore.updateWeeklyGoal(100)
+            dataStore.updateWeeklyGoal(200)
         }
-        let initialGoal = storedGoal > 0 ? storedGoal : 100
+        let initialGoal = storedGoal > 0 ? storedGoal : 200
         self.currentGoal = initialGoal
         self.suggestedGoal = Self.defaultSuggestedGoal(from: initialGoal)
         evaluateGoalPrompt()

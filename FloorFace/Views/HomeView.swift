@@ -6,7 +6,7 @@ struct HomeView: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var appStateViewModel: AppStateViewModel
 
-    @State private var goalInput: Double = 100
+    @State private var goalInput: Double = 200
 
     var body: some View {
         TabView {

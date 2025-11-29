@@ -4,7 +4,7 @@ struct SettingsView: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var pushupViewModel: PushupViewModel
 
-    @State private var sliderValue: Double = 100
+    @State private var sliderValue: Double = 200
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {

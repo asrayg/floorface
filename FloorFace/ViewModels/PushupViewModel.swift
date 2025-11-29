@@ -36,8 +36,8 @@ final class PushupViewModel: ObservableObject {
         todayCount = counts[key, default: 0]
         let storedGoal = dataStore.weeklyGoal()
         if storedGoal == 0 {
-            dataStore.updateWeeklyGoal(100)
-            weeklyGoal = 100
+            dataStore.updateWeeklyGoal(200)
+            weeklyGoal = 200
         } else {
             weeklyGoal = storedGoal
         }
