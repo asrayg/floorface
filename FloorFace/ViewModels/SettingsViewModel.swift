@@ -5,6 +5,7 @@ final class SettingsViewModel: ObservableObject {
     @Published var currentGoal: Int
     @Published var suggestedGoal: Int
     @Published var showGoalPrompt = false
+    @Published var notificationHour: Int
 
     private let dataStore: DataStore
     private let calendar: Calendar
@@ -19,6 +20,7 @@ final class SettingsViewModel: ObservableObject {
         let initialGoal = storedGoal > 0 ? storedGoal : 200
         self.currentGoal = initialGoal
         self.suggestedGoal = Self.defaultSuggestedGoal(from: initialGoal)
+        self.notificationHour = dataStore.notificationHour()
         evaluateGoalPrompt()
     }
 
@@ -46,6 +48,12 @@ final class SettingsViewModel: ObservableObject {
         guard weekday == 1 else { return false }
         guard let lastPrompt = dataStore.lastGoalPromptDate() else { return true }
         return calendar.compare(lastPrompt, to: date, toGranularity: .weekOfYear) != .orderedSame
+    }
+
+    func setNotificationHour(_ hour: Int) {
+        notificationHour = hour
+        dataStore.setNotificationHour(hour)
+        NotificationService.shared.scheduleDailyReminder()
     }
 
     private static func defaultSuggestedGoal(from goal: Int) -> Int {

@@ -9,6 +9,7 @@ final class DataStore {
         static let streakCount = "streakCount"
         static let hasPromptedForNotifications = "hasPromptedForNotifications"
         static let notificationsEnabled = "notificationsEnabled"
+        static let notificationHour = "notificationHour"
     }
 
     private let defaults: UserDefaults
@@ -164,6 +165,15 @@ final class DataStore {
 
     func setNotificationsEnabled(_ value: Bool) {
         defaults.set(value, forKey: Key.notificationsEnabled)
+    }
+
+    func notificationHour() -> Int {
+        let hour = defaults.integer(forKey: Key.notificationHour)
+        return hour == 0 ? 18 : hour
+    }
+
+    func setNotificationHour(_ hour: Int) {
+        defaults.set(hour, forKey: Key.notificationHour)
     }
 
     func weeklySeries(for date: Date = Date()) -> [(label: String, count: Int)] {

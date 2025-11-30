@@ -38,6 +38,17 @@ struct SettingsView: View {
                     }
                 }
 
+                Section("Notifications") {
+                    Picker("Daily reminder time", selection: Binding(
+                        get: { settingsViewModel.notificationHour },
+                        set: { settingsViewModel.setNotificationHour($0) }
+                    )) {
+                        ForEach(0..<24) { hour in
+                            Text(formatHour(hour)).tag(hour)
+                        }
+                    }
+                }
+
                 Section("About FloorFace") {
                     Text("FloorFace keeps you honest on the floor. It was built and is maintained by Asray Gopa to make pushup tracking simple, offline, and fun.")
                         .font(.subheadline)
@@ -51,6 +62,13 @@ struct SettingsView: View {
                 sliderValue = Double(settingsViewModel.currentGoal)
             }
         }
+    }
+    
+    private func formatHour(_ hour: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        let date = Calendar.current.date(bySettingHour: hour, minute: 0, second: 0, of: Date()) ?? Date()
+        return formatter.string(from: date)
     }
 }
 

@@ -26,10 +26,11 @@ final class NotificationService {
         }
     }
 
-    func scheduleDailyReminder(at hour: Int = 18) {
+    func scheduleDailyReminder() {
         guard dataStore.notificationsEnabled() else { return }
         center.removePendingNotificationRequests(withIdentifiers: ["dailyPushupReminder"])
 
+        let hour = dataStore.notificationHour()
         var dateComponents = DateComponents()
         dateComponents.hour = hour
 

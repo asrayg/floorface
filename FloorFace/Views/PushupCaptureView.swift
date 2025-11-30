@@ -1,24 +1,14 @@
 import SwiftUI
-import AVFoundation
 
 struct PushupCaptureView: View {
     @EnvironmentObject var viewModel: PushupViewModel
     @StateObject private var cameraManager = CameraPreviewManager()
-    @State private var cameraPermissionStatus: AVAuthorizationStatus = .notDetermined
+    @State private var isEndingSession = false
 
     var body: some View {
         ZStack {
-            if cameraPermissionStatus == .authorized {
-                CameraPreviewView(session: cameraManager.session)
-                    .ignoresSafeArea()
-            } else {
-                LinearGradient(
-                    colors: [.black, .purple.opacity(0.7)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+            CameraPreviewView(session: cameraManager.session)
                 .ignoresSafeArea()
-            }
             
             Color.black.opacity(0.3)
                 .ignoresSafeArea()
@@ -66,13 +56,15 @@ struct PushupCaptureView: View {
                 
                 Button {
                     if viewModel.isSessionActive {
+                        isEndingSession = true
                         viewModel.endSession()
                         cameraManager.stopSession()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            isEndingSession = false
+                        }
                     } else {
                         viewModel.startSession()
-                        if cameraPermissionStatus == .authorized {
-                            cameraManager.startSession()
-                        }
+                        cameraManager.startSession()
                     }
                 } label: {
                     Text(viewModel.isSessionActive ? "End Session" : "Start Session")
@@ -82,6 +74,7 @@ struct PushupCaptureView: View {
                         .foregroundStyle(.white)
                         .cornerRadius(16)
                 }
+                .buttonStyle(.plain)
                 .padding(.horizontal)
             }
             .padding()
@@ -90,62 +83,24 @@ struct PushupCaptureView: View {
         .gesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { _ in
-                    if viewModel.isSessionActive {
+                    if viewModel.isSessionActive && !isEndingSession {
                         viewModel.handleTouch()
                     }
                 }
         )
         .simultaneousGesture(
             TapGesture()
-                .onEnded {
-                    if viewModel.isSessionActive {
+                .onEnded { _ in
+                    if viewModel.isSessionActive && !isEndingSession {
                         viewModel.handleTouch()
                     }
                 }
         )
         .onAppear {
-            checkCameraPermission()
+            cameraManager.startSession()
         }
         .onDisappear {
             cameraManager.stopSession()
-        }
-        .overlay(alignment: .bottom) {
-            if cameraPermissionStatus != .authorized {
-                VStack(spacing: 12) {
-                    Text("Enable camera to see live preview")
-                        .font(.subheadline)
-                        .foregroundStyle(.white)
-                    Button {
-                        requestCameraAccess()
-                    } label: {
-                        Text("Enable Camera")
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 12)
-                            .background(Color.blue)
-                            .foregroundStyle(.white)
-                            .cornerRadius(12)
-                    }
-                }
-                .padding()
-                .background(.ultraThinMaterial)
-                .cornerRadius(16)
-                .padding()
-            }
-        }
-    }
-    
-    private func checkCameraPermission() {
-        cameraPermissionStatus = AVCaptureDevice.authorizationStatus(for: .video)
-    }
-    
-    private func requestCameraAccess() {
-        AVCaptureDevice.requestAccess(for: .video) { granted in
-            DispatchQueue.main.async {
-                cameraPermissionStatus = granted ? .authorized : .denied
-                if granted {
-                    cameraManager.startSession()
-                }
-            }
         }
     }
 }
